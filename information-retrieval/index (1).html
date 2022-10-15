@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    #uploadImage{
+      text-align: center;
+      align-items: center;
+    }
+    #heading1{
+      text-align: center;
+      background-color: burlywood;
+    }
+    #displayImage{
+      width: 800px;
+      height: 500px;
+      border: 1px solid black;
+      background-position: center;
+      background-size: cover;
+    }
+    #h3Text{
+      background-color: burlywood;
+    }
+    #resultantCharacters{
+      width: 400px;
+      height: 50px;
+      border: 1px solid black;
+    }
+    
+    #newpost {
+    display: none;
+    }
+
+    #newpost.visible {
+      display: block;
+    }
+
+    #extractedCharacters{
+      font-size: large;
+      background-color: red;
+      font-style: italic;
+      font-weight: bold;
+
+    }
+
+  </style>
+  <title>Project1</title>
+  <h1 id="heading1">Recognition of Text through Visual Image</h1>
+</head>
+<body>
+
+  <h3 id="h3Text"> Upload Image to detect characters </h3>
+  <input type="file" id="uploadImage"accept="image/png, image/jpg">
+  <div id="displayImage"></div>
+
+  <h3 id="h3Text"> Displaying Result after recognition of characters from the Image</h3>
+  <!-- <div id="resultantCharacters"><p>This is the text</p></div> -->
+
+  <!-- display extracted text -->
+  <button id="button" style="font-size: medium;">Click me for the extracted result</button>
+
+<div id="newpost">
+  <p id="extractedCharacters">The Extracted Text from the Image is "GOOGLE"</p>
+</div>
+
+  <script>
+
+    // variables and function to display uploaded image
+    const uploadImage = document.querySelector("#uploadImage");
+    var displayedImage = "";
+
+    uploadImage.addEventListener("change", function(){
+      const reader = new FileReader();
+      reader.addEventListener("load", ()=>{
+        displayedImage = reader.result;
+        document.querySelector("#displayImage").style.backgroundImage = `url(${displayedImage})`
+      });
+      reader.readAsDataURL(this.files[0])
+    })
+
+    // function to display extracted text 
+    var div = document.getElementById('newpost');
+
+    document.getElementById('button').addEventListener('click', showhide);
+
+    function showhide() {
+      div.classList.toggle('visible');
+    }
+  </script>
+</body>
+</html>
